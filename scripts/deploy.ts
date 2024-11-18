@@ -25,6 +25,16 @@ async function main() {
       ? '0x4ec04f4d46d7e34ebf0c3932b65068168fdce7f6'
       : '0xa9999999c3D05Fb75cE7230e0D22F5625527d583';
 
+  const SKlay =
+    network.config.chainId === 1001
+      ? '0xC04f81b4F06f692f7D1EE90faD0527Cca0E62eaD'
+      : '0x77777779eE2d933dA027Ee1fB3590c41529046c8';
+
+  const StKaia =
+    network.config.chainId === 1001
+      ? '0x4ca24B2Dee93CBdE1Bbf7f09fcc2650E4C2f5B3F'
+      : '0x42952B873ed6f7f0A7E4992E2a9818E3A9001995';
+
   const owner = await ethers.getSigner(<string>network.config.from);
   console.log('>> Deploy owner : ', owner.address);
 
@@ -59,9 +69,8 @@ async function main() {
   await sleep(2000);
 
   // stKAIA - Lair Bughole
-  const rate1 = ethers.utils.parseEther('1.0083');
-  const rateProvider4 = await ethers.getContractFactory('LstStaticRateProvider');
-  const RateProvider4 = await upgrades.deployProxy(rateProvider4, [rate1], {
+  const rateProvider4 = await ethers.getContractFactory('StKaiaRateProvider');
+  const RateProvider4 = await upgrades.deployProxy(rateProvider4, [StKaia], {
     initializer: 'initialize',
   });
   await RateProvider4.deployed();
@@ -70,9 +79,8 @@ async function main() {
   await sleep(2000);
 
   // sKLAY - Ozys
-  const rate2 = ethers.utils.parseEther('1.287');
-  const rateProvider5 = await ethers.getContractFactory('LstStaticRateProvider');
-  const RateProvider5 = await upgrades.deployProxy(rateProvider5, [rate2], {
+  const rateProvider5 = await ethers.getContractFactory('SKlayRateProvider');
+  const RateProvider5 = await upgrades.deployProxy(rateProvider5, [SKlay], {
     initializer: 'initialize',
   });
   await RateProvider5.deployed();

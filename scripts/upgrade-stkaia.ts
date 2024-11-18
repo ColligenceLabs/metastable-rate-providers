@@ -7,7 +7,7 @@ import { ethers, upgrades, network } from 'hardhat';
 async function main() {
   const StKaia =
     network.config.chainId === 1001
-      ? '0x0000000000000000000000000000000000000000'
+      ? '0x4ca24B2Dee93CBdE1Bbf7f09fcc2650E4C2f5B3F'
       : '0x42952B873ed6f7f0A7E4992E2a9818E3A9001995';
 
   const proxy =
