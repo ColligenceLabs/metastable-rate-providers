@@ -21,7 +21,7 @@ async function main() {
 
   const newImplementation = await ethers.getContractFactory('SKlayRateProvider');
 
-  console.log('Upgrading wKoKlay...');
+  console.log('Upgrading SKLAY...');
 
   const sKlay = await upgrades.upgradeProxy(proxy, newImplementation);
   // const sKlay = await upgrades.upgradeProxy(proxy, newImplementation, {
