@@ -13,32 +13,29 @@ contract SKlayRateProvider is
 {
     uint256 public rate;
     ISKlay public SKlay;
-    bool public isSet;
 
     modifier validAddress(address value) {
         require(value != address(0), "SKlayRateProvider:: address is zero");
         _;
     }
 
-    modifier isNotSet() {
-        require(isSet != true, "SKlayRateProvider:: SKLAY is already set");
-        _;
-    }
+    event SetSKlay(address);
 
     /// @custom:oz-upgrades-unsafe-allow constructor
     constructor() {
         _disableInitializers();
     }
 
-    function initialize(uint256 _rate)
-    external
-    initializer
+    function initialize(address _SKlay)
+        external
+        initializer
+        validAddress(_SKlay)
     {
         __Pausable_init_unchained();
         __Ownable_init_unchained();
 
-        require(_rate > 0, "LstStaticRateProvider:: rate should be bigger than zero");
-        rate = _rate;
+        SKlay = ISKlay(_SKlay);
+        emit SetSKlay(_SKlay);
     }
 
     function getRate() external view override returns (uint256) {
@@ -48,6 +45,6 @@ contract SKlayRateProvider is
 
     function setSKlay(address _SKlay) public onlyOwner() {
         SKlay = ISKlay(_SKlay);
-        isSet = true;
+        emit SetSKlay(_SKlay);
     }
 }
