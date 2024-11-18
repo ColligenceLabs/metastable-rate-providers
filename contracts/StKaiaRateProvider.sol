@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts-upgradeable/security/PausableUpgradeable.sol";
@@ -11,7 +13,6 @@ contract StKaiaRateProvider is
     IRateProvider,
     PausableUpgradeable
 {
-    uint256 public rate;
     IStKaia public StKaia;
 
     modifier validAddress(address value) {

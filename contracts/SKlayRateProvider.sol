@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts-upgradeable/security/PausableUpgradeable.sol";
@@ -11,7 +13,6 @@ contract SKlayRateProvider is
     IRateProvider,
     PausableUpgradeable
 {
-    uint256 public rate;
     ISKlay public SKlay;
 
     modifier validAddress(address value) {
